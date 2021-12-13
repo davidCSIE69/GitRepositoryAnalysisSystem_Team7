@@ -1,5 +1,6 @@
 .gradle
 .idea
+*.class
 build
 DEMO影片
 文件
