@@ -11,7 +11,8 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     background: rgba(178, 209, 209, 0.835);
-    text-align: center;
+    display: flex;
+    flex-direction: column;
     color: rgb(0, 0, 0);
     border-radius: 10px;
     padding: 30px;
@@ -19,32 +20,63 @@ body {
     width: 20%;
 }
 
+.login #githublogin{
+    background-image: url("../../assets/images/githubBtn.png") ;
+    margin: 0 auto;
+    background-size:cover;
+    border: none;
+    width: 160px;
+    height: 48px;
+    background-position: center;
+    background-color: rgba(255,255,255,0);
+}
 .login i {
     font-size: 100px;
-    margin: 20px auto;
+    margin: 5px auto;
+    text-align: center;
 }
-
+.login #signIn{
+    text-align: start;
+}
+.login #or{
+    text-align: center;
+}
+.login h1{
+    text-align: center;
+}
+.login h2{
+    margin: 17px 0 17px;
+}
 input[type="text"],
 input[type="password"] {
     font-size: 16px;
     font-family: "微軟正黑體", sans-serif;
-    padding: 5px;
+    padding: 3px;
     border-radius: 4px;
     margin: 0 auto;
     display: block;
-    width: 80%;
+    width: 90%;
 }
-
-button {
+label{
+    text-align: start;
+    font-size: 16px;
+    
+}
+.loginButtons button {
     border: 0;
-    padding: 6px 12px;
-    margin: 20px auto;
+    padding: 7px 18px;
     font-size: 18px;
     font-family: "微軟正黑體", sans-serif;
-    background: rgb(48, 48, 48);
+    background: #0a5e91;
     color: rgb(255, 255, 255);
+    border-radius:10%
 }
-
+.loginButtons{
+    flex-direction: row;
+    justify-content:space-around;
+    display: flex;
+    align-items:center;
+}
 @media (max-width:450px) {
     .login {
         width: 70%;
