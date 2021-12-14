@@ -25,7 +25,7 @@
         <i class="fas fa-user-circle fa-5x" ></i> <!-- User icon-->
         <br>
         <h2 id="signIn">Sign In</h2>
-        <button id="githublogin" type="submit"></button>
+        <button id="githublogin" type="submit" (click)="GoToGitHub()"></button>
         <h2 id="or">Or</h2>
         <label for="account">Account
           <input type="text" name = "account" id="account"  [(ngModel)]="accountInput" required ><!-- placeholder顯示在輸入框內的提示 -->
