@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   badRequest:any;
   Username = "";
   UserID = "";
+  signup="signup";
   constructor(private router: Router, private loginService: LoginService , private acrouter: ActivatedRoute) {
    }
 
