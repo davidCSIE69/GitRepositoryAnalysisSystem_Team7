@@ -1,6 +1,9 @@
 package usecase;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
+
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,6 +33,18 @@ public class GithubRepositoryAccessor {
         JSONArray jsonArray = new JSONArray(completeContent);
         closeAllConnection();
         return jsonArray;
+    }
+
+    public JSONArray httpsget(String url) throws IOException{
+        httpsConnection = getConnection(url);
+        httpsConnection.setRequestMethod("GET");
+        setConnectionProperty(httpsConnection);
+
+        BufferedReader reader = getJSONUsingHttpsGet(httpsConnection);
+
+        String completeContent = getCompleteContentString(reader);
+        JSONArray j = new JSONArray(completeContent);
+        return  j;
     }
 
     public void addHTTPSGetProperty(String property, String value){
