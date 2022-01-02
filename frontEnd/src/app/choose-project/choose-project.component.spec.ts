@@ -13,13 +13,15 @@ describe('ChooseProjectComponent', () => {
     .compileComponents();
   });
 
-  beforeEach(() => {
+  /*beforeEach(() => {
     fixture = TestBed.createComponent(ChooseProjectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  });*/
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    fixture = TestBed.createComponent(ChooseProjectComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
   });
 });
