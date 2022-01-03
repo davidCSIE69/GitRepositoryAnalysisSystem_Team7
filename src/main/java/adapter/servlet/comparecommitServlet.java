@@ -60,7 +60,8 @@ public class comparecommitServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         ArrayList<String> test = getCommitArrayFromRepo(owner,repo,branch);
         Map<String,Integer> map = getcommittime(test);
-        out.println(map);
+        JSONObject jo = new JSONObject(map);
+        out.println(jo);
         out.close();
     }
 
