@@ -47,7 +47,7 @@ public class GitRepositoryRepositoryImpl implements GitRepositoryRepository {
         try {
             assert conn != null;
             PreparedStatement preparedStatement = conn.prepareStatement(insert);
-            preparedStatement.setString (1,gitRepository.getId());
+            preparedStatement.setString (1, gitRepository.getId());
             preparedStatement.setString (2, gitRepository.getRepoName());
             preparedStatement.setString (3, gitRepository.getOwnerName());
             preparedStatement.execute();
