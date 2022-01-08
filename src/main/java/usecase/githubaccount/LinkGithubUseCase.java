@@ -14,7 +14,15 @@ public class LinkGithubUseCase {
 
     public void execute(LinkGithubInput input) {
         String account = input.getAccount();
-        String code = input.getGithubCode();
-        linkGithubAccount.linkGithubAccountByAccount(account, code);
+        String token = input.getToken();
+        linkGithubAccount.linkGithubAccountByAccount(account, token);
+    }
+
+    public String getClientID(){
+        return linkGithubAccount.getClientID();
+    }
+
+    public String getClientSecret(){
+        return linkGithubAccount.getClientSecret();
     }
 }

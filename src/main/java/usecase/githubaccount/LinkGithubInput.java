@@ -5,6 +5,6 @@ public interface LinkGithubInput {
     String getAccount();
     void setId(String id);
     String getId();
-    void setGithubCode(String githubCode);
-    String getGithubCode();
+    void setToken(String access_token);
+    String getToken();
 }

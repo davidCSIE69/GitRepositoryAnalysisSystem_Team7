@@ -2,17 +2,17 @@ package domain;
 
 public class GithubAccount {
     private String id;
-    private String githubCode;
     private String account;
+    private String access_token;
 
-    public GithubAccount(String id, String account, String githubCode) {
+    public GithubAccount(String id, String account, String access_token) {
         this.id = id;
-        this.githubCode = githubCode;
+        this.access_token = access_token;
         this.account = account;
     }
 
-    public String getGithubCode() {
-        return githubCode;
+    public String getToken() {
+        return access_token;
     }
 
     public String getId() {

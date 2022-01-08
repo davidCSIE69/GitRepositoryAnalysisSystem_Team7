@@ -5,16 +5,16 @@ import usecase.githubaccount.LinkGithubOutput;
 
 public class LinkGithubOutputImpl implements LinkGithubOutput {
     private String id;
-    private String githubCode;
+    private String access_token;
 
     @Override
-    public void setGithubCode(String githubCode) {
-        this.githubCode = githubCode;
+    public void setToken(String access_token) {
+        this.access_token = access_token;
     }
 
     @Override
-    public String getGitGithubCode() {
-        return this.githubCode;
+    public String getToken() {
+        return this.access_token;
     }
 
     @Override

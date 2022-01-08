@@ -5,7 +5,7 @@ import usecase.githubaccount.LinkGithubInput;
 public class LinkGithubInputImpl implements LinkGithubInput {
 
     private String id;
-    private String githubCode;
+    private String access_token;
     private String account;
 
     public void setAccount(String account) {
@@ -24,12 +24,13 @@ public class LinkGithubInputImpl implements LinkGithubInput {
         return this.id;
     }
 
-    public void setGithubCode(String githubCode) {
-        this.githubCode = githubCode;
+    public void setToken(String access_token) {
+        this.access_token = access_token;
+    }
+
+    public String getToken() {
+        return this.access_token;
     }
 
 
-    public String getGithubCode() {
-        return this.githubCode;
-    }
 }
