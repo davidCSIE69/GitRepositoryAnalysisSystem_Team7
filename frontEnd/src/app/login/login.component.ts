@@ -29,8 +29,16 @@ export class LoginComponent implements OnInit {
   GoToGitHub(){
     let client_id = "d9e8c7044e9fa5c1575a";
     let url = "https://github.com/login/oauth/authorize";
-    let scope = "repo";
-    window.open(url+"?client_id="+client_id+"&scope="+scope);
+    
+    let scopes = [
+      'user',
+      'repo',
+    ];
+    let scope = scopes.join(',');
+    
+    window.location.href = url+
+      "?client_id="+client_id+
+      "&scope="+scope;
   }
   // tslint:disable-next-line
   logInCheck() {
