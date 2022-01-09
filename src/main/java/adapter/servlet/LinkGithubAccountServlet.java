@@ -1,6 +1,9 @@
 package adapter.servlet;
 
 
+import adapter.account.AccountRepositoryImpl;
+import adapter.account.CreateAccountInputImpl;
+import adapter.account.CreateAccountOutputImpl;
 import adapter.githubaccount.LinkGithubAccountImpl;
 import adapter.githubaccount.LinkGithubInputImpl;
 import adapter.githubaccount.LinkGithubOutputImpl;
@@ -8,6 +11,10 @@ import domain.Account;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import usecase.GithubRepositoryAccessor;
+import usecase.account.AccountRepository;
+import usecase.account.CreateAccountInput;
+import usecase.account.CreateAccountOutput;
+import usecase.account.CreateAccountUseCase;
 import usecase.githubaccount.LinkGithubAccount;
 import usecase.githubaccount.LinkGithubInput;
 import usecase.githubaccount.LinkGithubOutput;
@@ -32,7 +39,6 @@ public class LinkGithubAccountServlet extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JSONObject requestBody = new JSONObject(request.getReader().readLine());
-        String account = requestBody.getString("account");
         String code = requestBody.getString("code");
         JSONObject returnJson = new JSONObject();
         String githubname = null;
@@ -55,13 +61,6 @@ public class LinkGithubAccountServlet extends HttpServlet{
             JSONObject tokenJson = (JSONObject) tokenAccessor.httpsPost(tokenurl).get(0);
             String token = tokenJson.getString("access_token");
 
-            // insert token to sql
-            LinkGithubInput input = new LinkGithubInputImpl();
-            input.setAccount(account);
-            input.setToken(token);
-            linkGithubUseCase.execute(input);
-
-
             // get username
             String nameurl = "https://api.github.com/user";
             GithubRepositoryAccessor nameAccessor = new GithubRepositoryAccessor();
@@ -69,6 +68,26 @@ public class LinkGithubAccountServlet extends HttpServlet{
             nameAccessor.addHTTPSGetProperty("Authorization", token);
             JSONObject nameJson = (JSONObject) nameAccessor.httpsPost(nameurl).get(0);
             githubname = nameJson.getString("name");
+            String githubaccount = nameJson.getString("login");
+
+            AccountRepository accountRepository = new AccountRepositoryImpl();
+            Account fakeAccount = new Account(githubaccount, "password");
+            if(!accountRepository.verifyAccount(fakeAccount)){
+                // 首次登入
+                CreateAccountInput input = new CreateAccountInputImpl();
+                input.setName(githubname);
+                input.setAccount(githubaccount);
+                input.setPassword("password");
+                CreateAccountOutput output = new CreateAccountOutputImpl();
+                CreateAccountUseCase createAccountUseCase = new CreateAccountUseCase(accountRepository);
+                createAccountUseCase.execute(input, output);
+            }
+            // insert token to sql
+            LinkGithubInput input = new LinkGithubInputImpl();
+            input.setAccount(githubaccount);
+            input.setToken(token);
+            linkGithubUseCase.execute(input);
+
             returnJson.put("isSuccess", "true");
             returnJson.put("githubUsername", githubname);
         }
