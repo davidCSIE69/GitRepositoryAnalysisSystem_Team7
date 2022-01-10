@@ -10,6 +10,7 @@ public class Account {
     private String password;
     private String account;
     private List<String> projects;
+    private String githubCode;
 
     public Account(String account, String password) {
         this.id = UUID.randomUUID().toString();
@@ -58,7 +59,16 @@ public class Account {
     public void addProject(String id){
         projects.add(id);
     }
+
     public List<String> getProjects(){
         return this.projects;
+    }
+
+    public void setGithubCode(String code) {
+        this.githubCode = code;
+    }
+
+    public String getGithubCode() {
+        return this.githubCode;
     }
 }

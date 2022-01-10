@@ -35,16 +35,18 @@ public class GithubRepositoryAccessor {
         return jsonArray;
     }
 
-    public JSONArray httpsget(String url) throws IOException{
+
+    public JSONArray httpsPost(String url) throws IOException {
         httpsConnection = getConnection(url);
-        httpsConnection.setRequestMethod("GET");
+        httpsConnection.setRequestMethod("POST");
         setConnectionProperty(httpsConnection);
-
         BufferedReader reader = getJSONUsingHttpsGet(httpsConnection);
-
         String completeContent = getCompleteContentString(reader);
-        JSONArray j = new JSONArray(completeContent);
-        return  j;
+        if(completeContent.charAt(0) != '[') completeContent = "[" + completeContent + "]";
+        JSONArray jsonArray = new JSONArray(completeContent);
+        closeAllConnection();
+        return jsonArray;
+
     }
 
     public void addHTTPSGetProperty(String property, String value){
