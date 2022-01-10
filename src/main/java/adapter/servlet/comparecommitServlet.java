@@ -19,7 +19,7 @@ public class comparecommitServlet extends HttpServlet {
     private ArrayList<String> getCommitArrayFromRepo(String owner, String repo,String branch) throws IOException {
         String apiUrl = "https://api.github.com/repos/"+ owner + "/" + repo+ "/" +"commits?sha="+ branch+"&per_page=100";
         GithubRepositoryAccessor accessor = new GithubRepositoryAccessor();
-        JSONArray jsonArray = accessor.httpsget(apiUrl);
+        JSONArray jsonArray = accessor.httpsGet(apiUrl);
 
         ArrayList<String> name = new ArrayList<String>();
 
@@ -56,7 +56,7 @@ public class comparecommitServlet extends HttpServlet {
     private ArrayList<String>getallbranch(String owner,String repo) throws IOException{
         String apiUrl = "https://api.github.com/repos/"+owner+"/"+repo+"/branches";
         GithubRepositoryAccessor accessor = new GithubRepositoryAccessor();
-        JSONArray jsonArray = accessor.httpsget(apiUrl);
+        JSONArray jsonArray = accessor.httpsGet(apiUrl);
         ArrayList<String> bname = new ArrayList<String>();
         for(int i=0;i< jsonArray.length();i++){
             JSONObject obj = jsonArray.getJSONObject(i);
