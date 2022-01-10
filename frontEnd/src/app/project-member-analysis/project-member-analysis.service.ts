@@ -19,15 +19,5 @@ export class ProjectMemberAnalysisService {
   
   }
   
-  public GetPullrequest(owner,repo){
-    const headers = new HttpHeaders({
-      'Content-Type': 'text/json'
-    });
-    const options = {
-      headers
-    };
-    let url = '/GitRepositoryAnalysisSystem/pullrequest?owner='+owner+'&repo='+repo;
-    return this.httpClient.get<any>(url, options);
-  
-  }
+
 }

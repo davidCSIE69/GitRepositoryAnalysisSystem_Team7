@@ -29,13 +29,6 @@ export class ProjectMemberAnalysisComponent implements OnInit {
         {data: [65, 59], label: 'master'},
         {data: [28, 48], label: 'dev'}
       ]
-    },
-    PullRequest:{
-      Labels:['repo1', 'repo2'],
-      Data:[ 
-        {data: [65, 59], label: 'master'},
-        {data: [28, 48], label: 'dev'}
-      ]
     }
   }
   
@@ -64,20 +57,17 @@ export class ProjectMemberAnalysisComponent implements OnInit {
     for(let index in range(0,repos.length) ){
       this.allRepos.push({
         name:repos[index],
-        Commit:{Labels:[],Data:[{data:[],label:''}]},
-        PullRequest:{Labels:[],Data:[{data:[],label:''}]}});
-        this.getPullRequestDatas(owners[index],repos[index]);
+        Commit:{Labels:[],Data:[{data:[],label:''}]}});
+        this.getCommitDatas(owners[index],repos[index]);
     }
   }
-  getPullRequestDatas(owner,repo){
-    this.memberService.GetPullrequest(owner,repo).subscribe(
-      request=>{
-        let datas = request;
-        datas.Pull_Request
-      }
-    );
-  }
-  getCommitDatas(repo){
 
-  }
+  getCommitDatas(owner,repo){
+    this.memberService.GetComparecommit(owner,repo).subscribe(
+          request=>{
+            let datas = request;
+            datas.Pull_Request
+          }
+        );
+      }
 }
