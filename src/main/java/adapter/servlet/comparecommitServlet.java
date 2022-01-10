@@ -39,6 +39,8 @@ public class comparecommitServlet extends HttpServlet {
         return name;
     }
 
+
+
     private Map<String, Integer> getcommittime(ArrayList<String> name) throws IOException{
         Map<String,Integer> map = new HashMap<String, Integer>();
         for(int i=0;i< name.size();i++){
@@ -51,18 +53,39 @@ public class comparecommitServlet extends HttpServlet {
         return map;
     }
 
+    private ArrayList<String>getallbranch(String owner,String repo) throws IOException{
+        String apiUrl = "https://api.github.com/repos/"+owner+"/"+repo+"/branches";
+        GithubRepositoryAccessor accessor = new GithubRepositoryAccessor();
+        JSONArray jsonArray = accessor.httpsget(apiUrl);
+        ArrayList<String> bname = new ArrayList<String>();
+        for(int i=0;i< jsonArray.length();i++){
+            JSONObject obj = jsonArray.getJSONObject(i);
+            bname.add(obj.getString("name"));
+        }
+        return  bname;
+    }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String owner = new String(request.getParameter("owner"));
         String repo = new String(request.getParameter("repo"));
-        String branch = new String(request.getParameter("branch"));
+
         PrintWriter out = response.getWriter();
-        ArrayList<String> test = getCommitArrayFromRepo(owner,repo,branch);
-        Map<String,Integer> map = getcommittime(test);
-        JSONObject jo = new JSONObject(map);
-        out.println(jo);
+        ArrayList<String> branch = getallbranch(owner,repo);
+        for(int i=0;i < branch.size();i++){
+            ArrayList<String> test = getCommitArrayFromRepo(owner, repo, branch.get(i));
+            Map<String, Integer> map = getcommittime(test);
+            Map<String,Object> hm = new HashMap<>();
+            hm.put("Branch Name",branch.get(i));
+            hm.put("Commit",map);
+            JSONObject jo = new JSONObject(hm);
+            out.println(jo);
+        }
         out.close();
+        //ArrayList<String> bname = getallbranch(owner,repo);
+        //out.println(bname);
+
     }
 
 
