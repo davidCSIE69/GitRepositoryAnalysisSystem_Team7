@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../header/header.component';
+import { PersonalImformationComponent } from '../personal-imformation/personal-imformation.component';
 
 import { AddRepoComponent } from './add-repo.component';
 
@@ -8,7 +12,8 @@ describe('AddRepoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddRepoComponent ]
+      declarations: [ AddRepoComponent,HeaderComponent,PersonalImformationComponent,FooterComponent ],
+      imports:[RouterTestingModule]
     })
     .compileComponents();
   });

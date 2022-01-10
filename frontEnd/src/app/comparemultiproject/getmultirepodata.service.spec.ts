@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
 import { GetmultirepodataService } from './getmultirepodata.service';
@@ -6,7 +7,9 @@ describe('GetmultirepodataService', () => {
   let service: GetmultirepodataService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports:[HttpClientModule]
+    });
     service = TestBed.inject(GetmultirepodataService);
   });
 
