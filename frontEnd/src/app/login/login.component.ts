@@ -20,6 +20,16 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    let code = null;
+    this.acrouter.queryParamMap
+    .subscribe((params) => {
+      if(params.keys.includes("code")){
+        code = params["code"];
+      }
+    })
+    if(code!=null){
+      
+    }
   }
 
   // tslint:disable-next-line:typedef
