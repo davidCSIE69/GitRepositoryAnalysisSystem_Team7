@@ -65,7 +65,7 @@ public class LinkGithubAccountServlet extends HttpServlet{
             String nameurl = "https://api.github.com/user";
             GithubRepositoryAccessor nameAccessor = new GithubRepositoryAccessor();
             nameAccessor.addHTTPSGetProperty("Accept", "application/json");
-            nameAccessor.addHTTPSGetProperty("Authorization", token);
+            nameAccessor.addHTTPSGetProperty("Authorization", "token " + token);
             JSONObject nameJson = (JSONObject) nameAccessor.httpsPost(nameurl).get(0);
             githubname = nameJson.getString("name");
             String githubaccount = nameJson.getString("login");
@@ -83,10 +83,12 @@ public class LinkGithubAccountServlet extends HttpServlet{
                 createAccountUseCase.execute(input, output);
             }
             // insert token to sql
+            LinkGithubAccount linkGithubAccountInsert = new LinkGithubAccountImpl();
+            LinkGithubUseCase linkGithubUseCaseInsert = new LinkGithubUseCase(linkGithubAccountInsert);
             LinkGithubInput input = new LinkGithubInputImpl();
             input.setAccount(githubaccount);
             input.setToken(token);
-            linkGithubUseCase.execute(input);
+            linkGithubUseCaseInsert.execute(input);
 
             returnJson.put("isSuccess", "true");
             returnJson.put("githubUsername", githubname);
