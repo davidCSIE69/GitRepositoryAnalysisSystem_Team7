@@ -1,0 +1,15 @@
+.my_bread{
+    background-color: white;
+}
+.chartItemContainer{
+    display: flex;
+    flex-direction: row;
+    
+}
+.chartItemCard{
+    
+    margin-right:50px;
+    margin-left:50px;
+    height: auto;
+    width: 30%;
+}

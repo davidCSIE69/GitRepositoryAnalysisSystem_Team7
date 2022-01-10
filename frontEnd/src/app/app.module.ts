@@ -34,6 +34,7 @@ import { ComparemultiprojectComponent } from './comparemultiproject/comparemulti
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
+import { ProjectMemberAnalysisComponent } from './project-member-analysis/project-member-analysis.component';
 
 
 
@@ -62,6 +63,7 @@ import {MatSelectModule} from '@angular/material/select';
     ProjectoverviewComponent,
     FooterComponent,
     ComparemultiprojectComponent,
+    ProjectMemberAnalysisComponent,
 
 
   ],

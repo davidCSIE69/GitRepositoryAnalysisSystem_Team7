@@ -1,0 +1,60 @@
+<app-header></app-header>
+<div>
+    <nav aria-label="breadcrumb">
+        <ol  class="breadcrumb my_bread">
+          <li class="breadcrumb-item"><a href="{{chooseProject}}">My projects</a></li>
+          <li class="breadcrumb-item"><a  href="{{chooseRepository}}">Project 1</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Members</li>
+        </ol>
+      </nav>
+    <div class="member_overview">
+      <h1>Overview</h1>
+      <div class="chartItemContainer">
+      <div class="chartItemCard">  
+        <h2>Commit push</h2>
+        <div style="display: block;width: 100%;">
+          <canvas baseChart
+                  [datasets]="overview.Commit.Data"
+                  [labels]="overview.Commit.Labels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+          </canvas>
+        </div>
+      </div>
+      <div class="chartItemCard">
+        <h2>Pull request</h2>
+        <div style="display: block;width: 100%;">
+          <canvas baseChart
+                  [datasets]="overview.PullRequest.Data"
+                  [labels]="overview.PullRequest.Labels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+          </canvas>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="member_allRepo">
+      
+      <div class="member_repo" style=" color:black" *ngFor="let barChar of allRepos">
+        <h1>Repo:{{barChar.name}}</h1>
+        <div class="chartItemContainer">
+          <div class="chartItemCard">
+            <h2>Commit push</h2>
+            <div style="display: block;width: 100%;">
+              <canvas baseChart
+                      [datasets]="barChar.Commit.Data"
+                      [labels]="barChar.Commit.Labels"
+                      [options]="barChartOptions"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<app-footer></app-footer>
