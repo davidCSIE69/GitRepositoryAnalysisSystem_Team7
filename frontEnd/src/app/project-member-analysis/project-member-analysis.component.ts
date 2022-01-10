@@ -24,7 +24,7 @@ export class ProjectMemberAnalysisComponent implements OnInit {
   //Overview datas
   overview={
     Commit:{
-      Labels:['member1', 'member2'],
+      Labels:['davidCSIE69', 'shouhanchen'],
       Data:[ 
         {data: [65, 59], label: 'master'},
         {data: [28, 48], label: 'dev'}
@@ -41,7 +41,16 @@ export class ProjectMemberAnalysisComponent implements OnInit {
       PullRequest:{Labels:[],Data:{data:[],label:''}}
     },...]
   */
-  allRepos=[
+  allRepos=[{
+    name:"aa",
+    Commit:{
+      Labels:['davidCSIE69', 'shouhanchen'],
+      Data:[ 
+        {data: [65, 59], label: 'master'},
+        {data: [28, 48], label: 'dev'}
+      ]
+    }
+  }
   ]
   
   constructor(private memberService:ProjectMemberAnalysisService) { }
@@ -57,17 +66,17 @@ export class ProjectMemberAnalysisComponent implements OnInit {
     for(let index in range(0,repos.length) ){
       this.allRepos.push({
         name:repos[index],
-        Commit:{Labels:[],Data:[{data:[],label:''}]}});
-        this.getCommitDatas(owners[index],repos[index]);
+        Commit:{Labels:[],Data:[]}});
+        this.getCommitDatas(owners[index],repos[index],index);
     }
   }
 
-  getCommitDatas(owner,repo){
+  getCommitDatas(owner,repo,index){
     this.memberService.GetComparecommit(owner,repo).subscribe(
           request=>{
             let datas = request;
-            datas.Pull_Request
+            this.allRepos[index].Commit.Data.push({data:[datas["Branch Name"]],label:''})
           }
         );
-      }
+    }
 }
