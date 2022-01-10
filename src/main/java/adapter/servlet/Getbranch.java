@@ -31,8 +31,12 @@ public class Getbranch extends HttpServlet {
         String owner = new String(request.getParameter("owner"));
         String repo = new String(request.getParameter("repo"));
         PrintWriter out = response.getWriter();
+        HashMap<String,ArrayList<String>> branch = new HashMap<>();
         ArrayList<String> bname = getallbranch(owner,repo);
-        out.println(bname);
+        branch.put("branch Name",bname);
+        JSONObject jo = new JSONObject(branch);
+        out.println(jo);
+        out.close();
     }
 
 }
