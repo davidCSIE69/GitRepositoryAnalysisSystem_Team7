@@ -1,4 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../header/header.component';
+import { PersonalImformationComponent } from '../personal-imformation/personal-imformation.component';
 
 import { AddProjectFromGithubComponent } from './add-project-from-github.component';
 
@@ -8,7 +13,8 @@ describe('AddProjectFromGithubComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddProjectFromGithubComponent ]
+      imports:[FormsModule,RouterTestingModule ],
+      declarations: [ AddProjectFromGithubComponent,HeaderComponent,PersonalImformationComponent,FooterComponent ]
     })
     .compileComponents();
   });

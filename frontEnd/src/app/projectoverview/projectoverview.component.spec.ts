@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HeaderComponent } from '../header/header.component';
 
 import { ProjectoverviewComponent } from './projectoverview.component';
 
@@ -8,7 +10,8 @@ describe('ProjectoverviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProjectoverviewComponent ]
+      declarations: [ ProjectoverviewComponent,HeaderComponent ],
+      imports:[RouterTestingModule]
     })
     .compileComponents();
   });

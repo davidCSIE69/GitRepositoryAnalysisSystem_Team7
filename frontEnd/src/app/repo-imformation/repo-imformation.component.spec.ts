@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HeaderComponent } from '../header/header.component';
 
 import { RepoImformationComponent } from './repo-imformation.component';
 
@@ -8,7 +10,9 @@ describe('RepoImformationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RepoImformationComponent ]
+      declarations: [ RepoImformationComponent,HeaderComponent ],
+      imports:[RouterTestingModule],
+      providers:[]
     })
     .compileComponents();
   });
