@@ -62,6 +62,7 @@ import {MatSelectModule} from '@angular/material/select';
     ProjectoverviewComponent,
     FooterComponent,
     ComparemultiprojectComponent,
+    CodeBaseComponent
 
 
   ],
@@ -83,6 +84,17 @@ import {MatSelectModule} from '@angular/material/select';
     MatSelectModule
 
 
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    ProjectoverviewComponent,
+    AddProjectComponent,
+    AddRepoFromGithubComponent,
+    CodeBaseComponent,
+    ChooseRepositoryComponent,
+    RepoImformationComponent,
+    CodeBaseComponent
   ],
   providers: [], // 宣告要註冊的服務元件
   bootstrap: [AppComponent]

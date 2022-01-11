@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HeaderComponent } from '../header/header.component';
+import { PersonalImformationComponent } from '../personal-imformation/personal-imformation.component';
+import { RepoImformationComponent } from '../repo-imformation/repo-imformation.component';
 
 import { CodeBaseComponent } from './code-base.component';
 
@@ -8,7 +11,7 @@ describe('CodeBaseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CodeBaseComponent ]
+      declarations:[CodeBaseComponent,HeaderComponent,PersonalImformationComponent,RepoImformationComponent]
     })
     .compileComponents();
   });

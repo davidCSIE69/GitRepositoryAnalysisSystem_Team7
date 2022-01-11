@@ -1,4 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../header/header.component';
+import { PersonalImformationComponent } from '../personal-imformation/personal-imformation.component';
 
 import { ChooseProjectComponent } from './choose-project.component';
 
@@ -8,18 +13,21 @@ describe('ChooseProjectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChooseProjectComponent ]
+      declarations: [ ChooseProjectComponent,HeaderComponent,PersonalImformationComponent,FooterComponent ],
+      imports:[RouterTestingModule,HttpClientModule]
     })
     .compileComponents();
   });
 
-  beforeEach(() => {
+  /*beforeEach(() => {
     fixture = TestBed.createComponent(ChooseProjectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  });*/
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    fixture = TestBed.createComponent(ChooseProjectComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
   });
 });

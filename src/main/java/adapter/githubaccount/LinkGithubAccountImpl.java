@@ -48,7 +48,7 @@ public class LinkGithubAccountImpl implements LinkGithubAccount {
 
     @Override
     public String getClientID() {
-        final String query = " SELECT client_id FROM api WHERE name=github";
+        final String query = " SELECT client_id FROM api WHERE name='github'";
         String client_id = null;
         try{
             assert conn!= null;
@@ -68,7 +68,7 @@ public class LinkGithubAccountImpl implements LinkGithubAccount {
 
     @Override
     public String getClientSecret() {
-        final String query = " SELECT client_secret FROM api WHERE name=github";
+        final String query = " SELECT client_secret FROM api WHERE name='github'";
         String client_secret = null;
         try{
             assert conn!= null;
@@ -77,7 +77,7 @@ public class LinkGithubAccountImpl implements LinkGithubAccount {
 
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            client_secret = resultSet.getString("client_id");
+            client_secret = resultSet.getString("client_secret");
 
             return client_secret;
         }catch(Exception e){

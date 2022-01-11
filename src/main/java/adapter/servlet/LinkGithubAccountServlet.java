@@ -42,7 +42,7 @@ public class LinkGithubAccountServlet extends HttpServlet{
         String code = requestBody.getString("code");
         JSONObject returnJson = new JSONObject();
         String githubname = null;
-        try {
+
 
             LinkGithubAccount linkGithubAccount = new LinkGithubAccountImpl();
             LinkGithubUseCase linkGithubUseCase = new LinkGithubUseCase(linkGithubAccount);
@@ -60,16 +60,14 @@ public class LinkGithubAccountServlet extends HttpServlet{
             tokenAccessor.addHTTPSGetProperty("Accept", "application/json");
             JSONObject tokenJson = (JSONObject) tokenAccessor.httpsPost(tokenurl).get(0);
             String token = tokenJson.getString("access_token");
-
             // get username
             String nameurl = "https://api.github.com/user";
             GithubRepositoryAccessor nameAccessor = new GithubRepositoryAccessor();
             nameAccessor.addHTTPSGetProperty("Accept", "application/json");
-            nameAccessor.addHTTPSGetProperty("Authorization", token);
-            JSONObject nameJson = (JSONObject) nameAccessor.httpsPost(nameurl).get(0);
+            nameAccessor.addHTTPSGetProperty("Authorization", "token " + token);
+            JSONObject nameJson = (JSONObject) nameAccessor.httpsGet(nameurl).get(0);
             githubname = nameJson.getString("name");
             String githubaccount = nameJson.getString("login");
-
             AccountRepository accountRepository = new AccountRepositoryImpl();
             Account fakeAccount = new Account(githubaccount, "password");
             if(!accountRepository.verifyAccount(fakeAccount)){
@@ -83,15 +81,16 @@ public class LinkGithubAccountServlet extends HttpServlet{
                 createAccountUseCase.execute(input, output);
             }
             // insert token to sql
+            LinkGithubAccount linkGithubAccountInsert = new LinkGithubAccountImpl();
+            LinkGithubUseCase linkGithubUseCaseInsert = new LinkGithubUseCase(linkGithubAccountInsert);
             LinkGithubInput input = new LinkGithubInputImpl();
             input.setAccount(githubaccount);
             input.setToken(token);
-            linkGithubUseCase.execute(input);
+            linkGithubUseCaseInsert.execute(input);
 
             returnJson.put("isSuccess", "true");
             returnJson.put("githubUsername", githubname);
-        }
-        catch (Exception ignored) {}
+
 
         if (githubname == null){
             returnJson.put("isSuccess", "false");

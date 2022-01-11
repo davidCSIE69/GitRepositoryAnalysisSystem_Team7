@@ -1,4 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../header/header.component';
 
 import { ComparemultiprojectComponent } from './comparemultiproject.component';
 
@@ -8,7 +12,8 @@ describe('ComparemultiprojectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ComparemultiprojectComponent ]
+      declarations: [ ComparemultiprojectComponent,HeaderComponent,FooterComponent ],
+      imports:[RouterTestingModule,HttpClientModule]
     })
     .compileComponents();
   });

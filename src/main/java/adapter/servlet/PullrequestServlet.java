@@ -20,7 +20,7 @@ public class PullrequestServlet extends HttpServlet {
     private JSONArray gitpullrequest(String owner, String repo ) throws IOException{
         String api = "https://api.github.com/repos/"+owner+"/"+repo+"/pulls?state=all";
         GithubRepositoryAccessor accessor = new GithubRepositoryAccessor();
-        JSONArray jsonArray = accessor.httpsget(api);
+        JSONArray jsonArray = accessor.httpsGet(api);
         return  jsonArray;
 
     }
