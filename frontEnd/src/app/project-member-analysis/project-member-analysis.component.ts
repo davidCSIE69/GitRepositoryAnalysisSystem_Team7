@@ -47,18 +47,16 @@ export class ProjectMemberAnalysisComponent implements OnInit {
   constructor(private memberService:ProjectMemberAnalysisService) { }
   
   ngOnInit(): void {
-    this.totalrepo = window.sessionStorage.getItem('totalrepo');
-    this.totalowner = window.sessionStorage.getItem('totalowner');
+    this.totalrepo = JSON.parse(window.sessionStorage.getItem('totalrepo'));
+    this.totalowner = JSON.parse(window.sessionStorage.getItem('totalowner'));
     this.setRepos();
   }
   setRepos(){
     let repos = this.totalrepo;
     let owners = this.totalowner;
     for(let index =0;index<repos.length;index++ ){
-      this.allRepos.push({
-        "name":repos[index],
-        "Commit":null});
-        this.getCommitDatasTest(owners[index],repos[index],index);
+      
+        this.getCommitDatas(owners[index],repos[index],index);
     }
   }
   getCommitDatasTest(owner,repo,index){
@@ -86,8 +84,11 @@ export class ProjectMemberAnalysisComponent implements OnInit {
     this.memberService.GetComparecommit(owner,repo).subscribe(
           request=>{
             let datas = request;
+            this.allRepos.push({
+              "name":repo[index],
+              "Commit":{Labels:[],Data:{data:[],label:''}}});
             this.allRepos[index] = this.goThroughBranchs(datas);
-            this.overview.Commit.Labels = this.allMembers;
+            
 
           }
         );

@@ -39,13 +39,14 @@ export class ChooseRepositoryComponent implements OnInit {
               this.repoNames.push(item.repoName);
               this.owner.push(item.ownerName);
             }
+            console.log(this.repoNames);
+            console.log(this.owner);
+
+            sessionStorage.setItem('totalrepo', JSON.stringify(this.repoNames));
+            sessionStorage.setItem('totalowner', JSON.stringify(this.owner));
           }
         );
-        console.log(this.repoNames);
-        console.log(this.owner);
-
-        sessionStorage.setItem('totalrepo', JSON.stringify(this.repoNames));
-        sessionStorage.setItem('totalowner', JSON.stringify(this.owner));
+        
 
     }
 
