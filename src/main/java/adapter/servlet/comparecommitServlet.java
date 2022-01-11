@@ -73,6 +73,7 @@ public class comparecommitServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         ArrayList<String> branch = getallbranch(owner,repo);
+        out.println("[");
         for(int i=0;i < branch.size();i++){
             ArrayList<String> test = getCommitArrayFromRepo(owner, repo, branch.get(i));
             Map<String, Integer> map = getcommittime(test);
@@ -82,6 +83,7 @@ public class comparecommitServlet extends HttpServlet {
             JSONObject jo = new JSONObject(hm);
             out.println(jo);
         }
+        out.println("]");
         out.close();
         //ArrayList<String> bname = getallbranch(owner,repo);
         //out.println(bname);
