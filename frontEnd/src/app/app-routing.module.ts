@@ -16,7 +16,7 @@ import {IssueTrackComponent} from './issue-track/issue-track.component';
 import {HomepageComponent} from './homepage/homepage.component';
 import {ProjectoverviewComponent} from './projectoverview/projectoverview.component';
 import {ComparemultiprojectComponent} from './comparemultiproject/comparemultiproject.component';
-
+import {ProjectMemberAnalysisComponent} from './project-member-analysis/project-member-analysis.component';
 
 const routes: Routes = [
   {path: 'homepage', component: HomepageComponent},
@@ -36,6 +36,8 @@ const routes: Routes = [
   {path: 'issue-track', component: IssueTrackComponent},
   {path: 'projectoverview', component: ProjectoverviewComponent},
   {path: 'multiproject', component: ComparemultiprojectComponent},
+  {path: 'member-analysis', component: ProjectMemberAnalysisComponent},
+  
   {path: '**', component: LoginComponent}
 
 

@@ -67,4 +67,7 @@ export class ChooseRepositoryComponent implements OnInit {
     this.router.navigateByUrl('code-base');
 
   }
+  goToProjectMemberAnalysisPage(){
+    this.router.navigateByUrl('member-analysis');
+  }
 }
