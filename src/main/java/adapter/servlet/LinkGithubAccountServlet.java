@@ -87,7 +87,8 @@ public class LinkGithubAccountServlet extends HttpServlet{
             input.setAccount(githubaccount);
             input.setToken(token);
             linkGithubUseCaseInsert.execute(input);
-
+            fakeAccount = accountRepository.getAccountByAccountAndPassword(fakeAccount);
+            returnJson.put("userId",fakeAccount.getId());
             returnJson.put("isSuccess", "true");
             returnJson.put("githubUsername", githubname);
 

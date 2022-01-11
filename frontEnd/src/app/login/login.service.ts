@@ -17,7 +17,13 @@ export class LoginService {
     };
     return this.httpClient.post<any>('/GitRepositoryAnalysisSystem/userLogin', body, options);
   }
-  public sendGithubCode(){
-    
+  public sendGithubCode(body){
+    const headers = new HttpHeaders({
+      'Content-Type': 'text/json'
+    });
+    const options = {
+      headers
+    };
+    return this.httpClient.post<any>('/GitRepositoryAnalysisSystem/LinkGithub', body, options);
   }
 }

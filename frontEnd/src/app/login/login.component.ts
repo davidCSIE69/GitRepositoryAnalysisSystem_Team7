@@ -17,21 +17,40 @@ export class LoginComponent implements OnInit {
   UserID = "";
   signup="signup";
   constructor(private router: Router, private loginService: LoginService , private acrouter: ActivatedRoute) {
-   }
+  }
 
   ngOnInit(): void {
     let code = null;
+    
     this.acrouter.queryParamMap
     .subscribe((params) => {
       if(params.keys.includes("code")){
-        code = params["code"];
+        code = params.get("code");
+        this.sendGithubCode(code);
+        
       }
     })
     if(code!=null){
       
     }
   }
-
+  sendGithubCode(code){
+    let jsonObj = {"code":code};
+    let data = JSON.stringify(jsonObj);
+    this.loginService.sendGithubCode(data).subscribe(
+      request => {
+        this.datas = request;
+        if (this.datas.isSuccess){
+          this.router.navigate(["homepage"]);
+          console.log("userId =",this.datas.userId.toString())
+          sessionStorage.setItem('Username', this.datas.githubUsername.toString());
+          sessionStorage.setItem('UserID', this.datas.userId.toString());
+        }
+        else{
+          this.badRequest = "github 登入失敗";
+        }
+      });
+  }
   // tslint:disable-next-line:typedef
   redirectTo(url){
     this.router.navigateByUrl(url.toString());
@@ -66,9 +85,9 @@ export class LoginComponent implements OnInit {
         this.datas = request;
         if (this.datas.redirect){
           this.router.navigate([this.datas.redirect.toString()]);
-          console.log("userId =",this.datas.userId.toString())
+          
           sessionStorage.setItem('Username', this.datas.userName.toString());
-          sessionStorage.setItem('UserID', this.datas.userId.toString());
+          sessionStorage.setItem('userId', this.datas.userId.toString());
         }
         else{
           this.badRequest = "帳號或密碼錯誤";
