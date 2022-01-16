@@ -70,7 +70,7 @@ public class comparecommitServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String owner = new String(request.getParameter("owner"));
         String repo = new String(request.getParameter("repo"));
-
+        String output="";
         PrintWriter out = response.getWriter();
         ArrayList<String> branch = getallbranch(owner,repo);
         out.println("[");
@@ -79,9 +79,16 @@ public class comparecommitServlet extends HttpServlet {
             Map<String, Integer> map = getcommittime(test);
             Map<String,Object> hm = new HashMap<>();
             hm.put("Branch Name",branch.get(i));
+            ArrayList<Object> tes = new ArrayList<>();
             hm.put("Commit",map);
             JSONObject jo = new JSONObject(hm);
             out.println(jo);
+
+            if(i<branch.size()-1){
+                out.println(",");
+            }
+
+
         }
         out.println("]");
         out.close();

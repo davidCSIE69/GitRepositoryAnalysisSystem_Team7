@@ -60,10 +60,21 @@ export class ProjectMemberAnalysisComponent implements OnInit {
     }
   }
   getCommitDatasTest(owner,repo,index){
-    let datas = [{"Branch Name":"dev","Commit":{"cc":2,"sd":4}},
-                {"Branch Name":"head","Commit":{"cddc":2,"sd":4}}];
+    let datas = [
+      {"Commit":{"KuharaLuke":3,"davidCSIE69":1},"Branch Name":"dev_testcase"},
+      {"Commit":{"KuharaLuke":3,"david88":23,"GGinthe":3,"davidCSIE69":4,"TheNewLearn":8},"Branch Name":"dev"},
+      {"Commit":{"KuharaLuke":1,"davidCSIE69":1,"TheNewLearn":8},"Branch Name":"feature_compare_push"},
+      {"Commit":{"KuharaLuke":3,"david88":13,"GGinthe":3,"davidCSIE69":4,"TheNewLearn":8},"Branch Name":"feature/frontend/git_login"},
+      {"Commit":{"KuharaLuke":3,"david88":23,"GGinthe":3,"davidCSIE69":4,"TheNewLearn":8},"Branch Name":"feature/frontend/member_analyze"},
+      {"Commit":{"davidCSIE69":1},"Branch Name":"future/git_login_sql"},
+      {"Commit":{"KuharaLuke":3,"david88":23,"GGinthe":3,"davidCSIE69":4,"TheNewLearn":8},"Branch Name":"master"},
+      {"Commit":{"davidCSIE69":1,"GGinthe":3},"Branch Name":"origin/feature/github_Oauth_Servlet"}
+      ]
+      ;
     //run through所有branch
-    
+    this.allRepos.push({
+      "name":repo[index],
+      "Commit":{Labels:[],Data:{data:[],label:''}}});
     this.allRepos[index].Commit = this.goThroughBranchs(datas);
   }
   fatchAllMembers(datas){
@@ -85,9 +96,9 @@ export class ProjectMemberAnalysisComponent implements OnInit {
           request=>{
             let datas = request;
             this.allRepos.push({
-              "name":repo[index],
+              "name":repo,
               "Commit":{Labels:[],Data:{data:[],label:''}}});
-            this.allRepos[index] = this.goThroughBranchs(datas);
+            this.allRepos[index].Commit = this.goThroughBranchs(datas);
             
 
           }
